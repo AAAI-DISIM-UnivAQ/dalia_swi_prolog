@@ -1,0 +1,49 @@
+t60.
+
+:- dynamic location/1.
+:- dynamic equipment/1.
+:- dynamic evacuated/1.
+:- dynamic responded/1.
+
+coord_eventE(Type, A, B) :> 
+    handle_coord(Type, A, B).
+
+handle_coord(alarm, E, L) :-
+    assert(location(L)),
+    acquire_knowledge(E, Fact),
+    write('>>> AI FACT: '), write(Fact), nl,
+    assert(Fact),
+    write('>>> Evacuating and equipping for '), write(E), write(' at '), write(L), nl,
+    messageA(communicator, send_message(communicate(mary, E), Me)),
+    messageA(communicator, send_message(communicate(john, E), Me)),
+    messageA(evacuator, send_message(evacuate(L), Me)),
+    messageA(manager, send_message(emergency(E), Me)).
+
+handle_coord(equipped, E, B) :-
+    assert(equipment(E)),
+    write('>>> Equipment received: '), write(E), nl,
+    maybe_dispatch(E, B).
+
+handle_coord(evacuated, L, B) :-
+    assert(evacuated(L)),
+    write('>>> Evacuated: '), write(L), nl,
+    maybe_dispatch(L, B).
+
+handle_coord(responded, L, B) :-
+    assert(responded(L)),
+    write('>>> Responded: '), write(L), nl,
+    maybe_done(L, B).
+
+maybe_dispatch(X, B) :-
+    location(L), equipment(Eq),
+    write('>>> Dispatching responder with '), write(Eq), write(' to '), write(L), nl,
+    messageA(responder, send_message(respond(Eq, L), Me)),
+    retract(location(L)), retract(equipment(Eq)).
+maybe_dispatch(X, B) :- true.
+
+maybe_done(X, B) :-
+    evacuated(Lx), responded(Rx),
+    write('>>> ALL DONE at '), write(Lx), nl,
+    messageA(logger, send_message(log_event(message, coordinator, done), Me)),
+    retract(evacuated(Lx)), retract(responded(Rx)).
+maybe_done(X, B) :- true.

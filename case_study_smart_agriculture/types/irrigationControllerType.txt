@@ -1,0 +1,12 @@
+t60.
+
+:- dynamic irrigation_state/2.
+
+irrigateE(Field) :> 
+    write('>>> ACTIVATING irrigation for field: '), write(Field), nl,
+    (retract(irrigation_state(_,_)) -> true ; true),
+    assert(irrigation_state(active, Field)),
+    write('>>> IRRIGATION started at '), write(Field), nl,
+    messageA(farmer_agent, send_message(notify(status, irrigating, Field), Me)).
+
+logA(X) :> messageA(logger, send_message(X, Me)).

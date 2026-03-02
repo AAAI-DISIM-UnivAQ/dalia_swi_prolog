@@ -1,0 +1,10 @@
+t60.
+
+emergencyE(E) :>
+    dispatch_equipment(E).
+
+dispatch_equipment(E) :-
+    (E == fire -> X = firetruck ; E == earthquake -> X = buldozer ; E == smoke -> X = respirator ; X = unknown),
+    write('Equipment for Emergency '), write(E), write(' -> '), write(X), nl,
+    messageA(coordinator, send_message(coord_event(equipped, X, none), Me)),
+    messageA(logger, send_message(log_event(message, manager, done), Me)).

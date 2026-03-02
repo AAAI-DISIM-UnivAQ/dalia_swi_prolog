@@ -1,0 +1,12 @@
+t60.
+
+notifyE(Type, Info, Field) :> 
+    process_notify(Type, Info, Field).
+
+process_notify(advisory, Action, Field) :-
+    write('>>> FARMER NOTIFIED - Action: '), write(Action), 
+    write(' for field: '), write(Field), nl.
+
+process_notify(status, State, Field) :-
+    write('>>> FARMER STATUS UPDATE - '), write(State), 
+    write(' at field: '), write(Field), nl.

@@ -1,0 +1,5 @@
+t60.
+
+communicateE(Target, Content) :> 
+    write('>>> Communicating to '), write(Target), write(' about '), write(Content), nl,
+    messageA(Target, send_message(message(Content), Me)).

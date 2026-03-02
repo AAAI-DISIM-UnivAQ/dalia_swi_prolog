@@ -1,0 +1,16 @@
+t60.
+
+weather_updateE(Temp, Humidity, Forecast) :> 
+    write('>>> WEATHER received: T='), write(Temp), write(' H='), write(Humidity), write(' F='), write(Forecast), nl,
+    check_weather(Temp, Humidity, Forecast).
+
+check_weather(Temp, Humidity, Forecast) :-
+    (Temp > 38 ; Temp < 2 ; Humidity < 20 ; Forecast = storm),
+    !,
+    write('>>> WEATHER RISK - forwarding to crop_advisor'), nl,
+    messageA(crop_advisor, send_message(sensor_data(weather, Temp, Humidity, Forecast), Me)).
+
+check_weather(Temp, Humidity, Forecast) :-
+    write('>>> WEATHER NORMAL: T='), write(Temp), write(' H='), write(Humidity), write(' F='), write(Forecast), nl.
+
+logA(X) :> messageA(logger, send_message(X, Me)).

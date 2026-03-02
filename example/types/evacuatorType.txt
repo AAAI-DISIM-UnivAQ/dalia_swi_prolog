@@ -1,0 +1,7 @@
+t60.
+
+evacuateE(L) :> 
+    write('evacuating at '), write(L), nl, 
+    messageA(logger, send_message(log_event(message, evacuator, evacuating), Me)), 
+    messageA(coordinator, send_message(coord_event(evacuated, L, none), Me)), 
+    messageA(logger, send_message(log_event(message, evacuator, done), Me)).

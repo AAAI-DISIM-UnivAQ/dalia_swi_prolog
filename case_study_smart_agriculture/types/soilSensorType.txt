@@ -1,0 +1,16 @@
+t60.
+
+read_soilE(Moisture, Ph, Field) :> 
+    write('>>> SOIL received: M='), write(Moisture), write(' pH='), write(Ph), write(' F='), write(Field), nl,
+    check_soil(Moisture, Ph, Field).
+
+check_soil(Moisture, Ph, Field) :-
+    (Moisture < 30 ; Moisture > 80 ; Ph < 5.5 ; Ph > 7.5),
+    !,
+    write('>>> SOIL ALERT - forwarding to crop_advisor'), nl,
+    messageA(crop_advisor, send_message(sensor_data(soil, Moisture, Ph, Field), Me)).
+
+check_soil(Moisture, Ph, Field) :-
+    write('>>> SOIL NORMAL: M='), write(Moisture), write(' pH='), write(Ph), write(' F='), write(Field), nl.
+
+logA(X) :> messageA(logger, send_message(X, Me)).

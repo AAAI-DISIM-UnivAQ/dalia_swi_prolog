@@ -1,0 +1,15 @@
+t60.
+
+senseE(X, L) :> 
+    messageA(logger, send_message(log_event(generic, X, L), Me)),
+    check_alarm(X, L).
+
+check_alarm(X, L) :-
+    member(X, [smoke, fire, earthquake]),
+    write('>>> ALARM: '), write(X), write(' at '), write(L), nl,
+    messageA(coordinator, send_message(coord_event(alarm, X, L), Me)).
+
+check_alarm(X, L) :-
+    \+ member(X, [smoke, fire, earthquake]),
+    write('>>> FALSE ALARM: '), write(X), write(' at '), write(L), nl,
+    messageA(logger, send_message(log_event(falarm, X, L), Me)).

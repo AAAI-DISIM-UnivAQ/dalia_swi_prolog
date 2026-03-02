@@ -1,0 +1,6 @@
+t60.
+
+respondE(E, L) :> 
+    write('using '), write(E), write(' at '), write(L), nl, 
+    messageA(coordinator, send_message(coord_event(responded, L, none), Me)), 
+    messageA(logger, send_message(log_event(message, responder, done), Me)).

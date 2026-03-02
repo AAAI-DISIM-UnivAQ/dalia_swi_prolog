@@ -1,0 +1,48 @@
+t1.
+
+:- dynamic pending_soil/3.
+:- dynamic pending_weather/3.
+
+sensor_dataE(Type, A, B, C) :> 
+    process_sensor(Type, A, B, C).
+
+process_sensor(soil, Moisture, Ph, Field) :-
+    retractall(pending_soil(_,_,_)),
+    assert(pending_soil(Moisture, Ph, Field)),
+    to_atom(Moisture, MA), to_atom(Ph, PA), to_atom(Field, FA),
+    atom_concat('soil moisture ', MA, S1),
+    atom_concat(S1, ' pH ', S2),
+    atom_concat(S2, PA, S3),
+    atom_concat(S3, ' field ', S4),
+    atom_concat(S4, FA, Context),
+    acquire_knowledge(Context, Fact),
+    write('>>> AI FACT: '), write(Fact), nl,
+    assert(Fact),
+    decide_action(Fact, Field).
+
+process_sensor(weather, Temp, Humidity, Forecast) :-
+    retractall(pending_weather(_,_,_)),
+    assert(pending_weather(Temp, Humidity, Forecast)),
+    to_atom(Temp, TA), to_atom(Humidity, HA), to_atom(Forecast, FcA),
+    atom_concat('temperature ', TA, S1),
+    atom_concat(S1, ' humidity ', S2),
+    atom_concat(S2, HA, S3),
+    atom_concat(S3, ' forecast ', S4),
+    atom_concat(S4, FcA, Context),
+    acquire_knowledge(Context, Fact),
+    write('>>> AI FACT: '), write(Fact), nl,
+    assert(Fact),
+    decide_action(Fact, all_fields).
+
+to_atom(X, A) :- number(X), !, number_chars(X, Cs), atom_chars(A, Cs).
+to_atom(X, X) :- atom(X).
+
+decide_action(Fact, Field) :-
+    functor(Fact, Name, _),
+    messageA(irrigation_controller, send_message(irrigate(Field), Me)),
+    messageA(farmer_agent, send_message(notify(advisory, Name, Field), Me)),
+    write('>>> ACTION: '), write(Name), write(' at '), write(Field), nl,
+    (pending_soil(_,_,_) -> retractall(pending_soil(_,_,_)) ; true),
+    (pending_weather(_,_,_) -> retractall(pending_weather(_,_,_)) ; true).
+
+logA(X) :> messageA(logger, send_message(X, Me)).

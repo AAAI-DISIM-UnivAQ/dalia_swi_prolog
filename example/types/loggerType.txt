@@ -1,0 +1,10 @@
+t60.
+
+log_eventE(Type, A, B) :> 
+    print_log(Type, A, B).
+
+print_log(generic, X, L) :- write('Event: '), write(X), write(' at: '), write(L), nl.
+print_log(alarm, X, L) :- write('ALARM: '), write(X), write(' at: '), write(L), nl.
+print_log(falarm, X, L) :- write('False: '), write(X), write(' at: '), write(L), nl.
+print_log(message, A, X) :- write('Agent: '), write(A), write(' - Message: '), write(X), nl.
+print_log(Other, A, B) :- write('LOG: '), write(Other), write(' '), write(A), write(' '), write(B), nl.

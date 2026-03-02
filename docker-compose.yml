@@ -1,0 +1,27 @@
+services:
+  python:
+    pull_policy: missing
+    image: python:3.13
+  dalia:
+    depends_on:
+      - python
+    pull_policy: never
+    ports:
+      - "8118:8118"
+    restart: always
+    container_name: dalia
+    image: dalia
+    build: 
+      context: .
+      dockerfile: dockerfile
+    environment:
+      - docker=true
+      - OPENAI_API_KEY=${OPENAI_API_KEY} 
+    volumes:
+      - ${src}:/src
+      - ${dali}:/dali
+    networks:
+      - DALIA
+networks:
+  DALIA:
+    driver: bridge
