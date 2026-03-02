@@ -13,7 +13,7 @@ A containerized launcher for multi-agent systems written in
      [DALI–DALIA Compatibility](https://github.com/AAAI-DISIM-UnivAQ/dalia_swi_prolog/blob/main/compatibility.md)
    - Example:
      ```sh
-     git clone --branch v2026.01a --depth 1 https://github.com/AAAI-DISIM-UnivAQ/DALI_swi_prolog
+     git clone --branch swi-2026-03-03 --depth 1 https://github.com/AAAI-DISIM-UnivAQ/DALI_swi_prolog
      ```
 
 ---
