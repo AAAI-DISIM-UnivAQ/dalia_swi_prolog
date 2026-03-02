@@ -34,7 +34,7 @@ A containerized launcher for multi-agent systems written in
      ```
 3. Navigate into the cloned repository:
    ```sh
-   cd dalia
+   cd dalia_swi_prolog
    ```
 
 > **Note:** DALIA now uses SWI-Prolog (bundled in the Docker image). No Prolog license is required.
@@ -61,7 +61,7 @@ To enable the LLM Bridge features (e.g. allowing agents to consult ChatGPT via `
 provide your OpenAI API key using the `--token` parameter:
 
 ```sh
-./run --dali ../DALI --src example --token sk-proj-xxxxxxxxxxxxxxxxxxxx
+./run --dali ../DALI_swi_prolog --src example --token sk-proj-xxxxxxxxxxxxxxxxxxxx
 ```
 
 ---
@@ -73,7 +73,7 @@ Calls to the LLM service will receive a default *\"LLM disabled\"* response with
 contacting external APIs.
 
 ```sh
-./run --dali ../DALI --src example
+./run --dali ../DALI_swi_prolog --src example
 ```
 
 ---
@@ -98,7 +98,7 @@ A multi-agent emergency response system with 9 agents:
 **Launch:**
 
 ```sh
-./run --dali ../DALI --src example --token <YOUR_OPENAI_API_KEY>
+./run --dali ../DALI_swi_prolog --src example --token <YOUR_OPENAI_API_KEY>
 ```
 
 **Test — send a fire event:**
@@ -138,7 +138,7 @@ A multi-agent precision agriculture system with 6 agents:
 **Launch:**
 
 ```sh
-./run --dali ../DALI --src case_study_smart_agriculture --token <YOUR_OPENAI_API_KEY>
+./run --dali ../DALI_swi_prolog --src case_study_smart_agriculture --token <YOUR_OPENAI_API_KEY>
 ```
 
 **Test — send soil and weather data:**
