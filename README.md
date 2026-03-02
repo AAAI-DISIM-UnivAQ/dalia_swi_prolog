@@ -8,12 +8,12 @@ A containerized launcher for multi-agent systems written in
 ## Pre-requisites
 
 1. Install [Docker](https://docs.docker.com/engine/install/)
-2. Clone [DALI](https://github.com/AAAI-DISIM-UnivAQ/DALI)
+2. Clone [DALI](https://github.com/AAAI-DISIM-UnivAQ/DALI_swi_prolog)
    - Check the compatibility table:  
-     [DALI–DALIA Compatibility](https://github.com/lollix91/dalia/blob/main/compatibility.md)
+     [DALI–DALIA Compatibility](https://github.com/AAAI-DISIM-UnivAQ/dalia_swi_prolog/blob/main/compatibility.md)
    - Example:
      ```sh
-     git clone --branch v2026.01a --depth 1 https://github.com/AAAI-DISIM-UnivAQ/DALI
+     git clone --branch v2026.01a --depth 1 https://github.com/AAAI-DISIM-UnivAQ/DALI_swi_prolog
      ```
 
 ---
@@ -23,14 +23,14 @@ A containerized launcher for multi-agent systems written in
 1. Open a command shell (Command Prompt, Bash, etc.)
 2. Clone [DALIA](https://github.com/lollix91/dalia)
    - Check the compatibility table:  
-     [DALI–DALIA Compatibility](https://github.com/lollix91/dalia/blob/main/compatibility.md)
+     [DALI–DALIA Compatibility](https://github.com/AAAI-DISIM-UnivAQ/dalia_swi_prolog/blob/main/compatibility.md)
    - Examples:
      ```sh
-     git clone --branch 2026.01.30 --depth 1 https://github.com/lollix91/dalia
+     git clone --branch swi-2026-03-03 --depth 1 https://github.com/AAAI-DISIM-UnivAQ/dalia_swi_prolog
      ```
      or
      ```sh
-     git clone --depth 1 https://github.com/lollix91/dalia
+     git clone --depth 1 https://github.com/AAAI-DISIM-UnivAQ/dalia_swi_prolog
      ```
 3. Navigate into the cloned repository:
    ```sh
